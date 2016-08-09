@@ -337,7 +337,7 @@ func (edit Editor) JumpToMatching(sel interface{}) {
 	edit.Call("jumpToMatching", sel)
 }
 
-// ModifyNumber - if the character before the cursor is a number, this functions changes its value by `amount`.
+// ModifyNumber - change the value of the character before the cursor by `amount` if it is a number.
 func (edit Editor) ModifyNumber(amount int) {
 	edit.Call("modifyNumber", amount)
 }
@@ -669,7 +669,7 @@ func (edit Editor) SplitLine() {
 	edit.Call("splitLine")
 }
 
-// ToggleCommentLines given the currently selected range, this function either comments all the lines, or uncomments all of them.
+// ToggleCommentLines either comments all the lines or uncomments all of them depending on the currently selected range.
 func (edit Editor) ToggleCommentLines() {
 	edit.Call("toggleCommentLines")
 }
