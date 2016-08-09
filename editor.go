@@ -571,20 +571,145 @@ func (edit Editor) SetHighlightActiveLine(shouldHighlight bool) {
 	edit.Call("setHighlightActiveLine", shouldHighlight)
 }
 
-/*
-TODO Missing functions between setHighlightActiveLine and setTheme
-*/
+// SetHighlightGutterLine is an undocumented Ace function.
+func (edit Editor) SetHighlightGutterLine() {
+	edit.Call("setHighlightGutterLine")
+}
 
-// SetTheme changes the theme of the editor.
+// SetHighlightSelectedWord determines if the currently selected word should be highlighted.
+func (edit Editor) SetHighlightSelectedWord(shouldHighlight bool) {
+	edit.Call("setHighlightSelectedWord", shouldHighlight)
+}
+
+// SetKeyboardHandler determines if the currently selected word should be highlighted.
+func (edit Editor) SetKeyboardHandler(keyboardHandler string) {
+	edit.Call("setKeyboardHandler", keyboardHandler)
+}
+
+// SetOverwrite - Pass in `true` to enable overwrites in your session, or `false` to disable.
+// If overwrites is enabled, any text you enter will type over any text after it.
+// If the value of `overwrite` changes, this function also emites the `changeOverwrite` event.
+func (edit Editor) SetOverwrite(overwrite bool) {
+	edit.Call("setOverwrite", overwrite)
+}
+
+// SetPrintMarginColumn sets the column defining where the print margin should be.
+func (edit Editor) SetPrintMarginColumn(showPrintMargin int) {
+	edit.Call("setPrintMarginColumn", showPrintMargin)
+}
+
+// SetReadOnly - If `readOnly` is true, then the editor is set to read-only mode, and none of the content can change.
+func (edit Editor) SetReadOnly(readOnly bool) {
+	edit.Call("setReadOnly", readOnly)
+}
+
+// SetScrollSpeed sets how fast the mouse scrolling should do.
+func (edit Editor) SetScrollSpeed(speed int) {
+	edit.Call("setScrollSpeed", speed)
+}
+
+// SetSelectionStyle indicates how selections should occur.
+func (edit Editor) SetSelectionStyle(style string) {
+	edit.Call("setSelectionStyle", style)
+}
+
+// SetSession sets a new editsession to use. This method also emits the `changeSession` event.
+func (edit Editor) SetSession(session EditSession) {
+	edit.Call("setSession", session)
+}
+
+// SetShowFoldWidgets indicates whether the fold widgets are shown or not.
+func (edit Editor) SetShowFoldWidgets(show bool) {
+	edit.Call("setShowFoldWidgets", show)
+}
+
+// SetShowInvisibles - If `showInvisibles` is set to `true`, invisible characters—like spaces or new lines—are show in the editor.
+func (edit Editor) SetShowInvisibles(showInvisibles bool) {
+	edit.Call("setShowInvisibles", showInvisibles)
+}
+
+// SetShowPrintMargin - If `showPrintMargin` is set to `true`, the print margin is shown in the editor.
+func (edit Editor) SetShowPrintMargin(showPrintMargin bool) {
+	edit.Call("setShowPrintMargin", showPrintMargin)
+}
+
+// SetStyle adds a new class, `style`, to the editor.
+func (edit Editor) SetStyle(style string) {
+	edit.Call("setStyle", style)
+}
+
+// SetTheme sets a new theme for the editor. `theme` should exist, and be a directory path, like `ace/theme/textmate`.
 func (edit Editor) SetTheme(theme string) {
 	edit.Call("setTheme", theme)
 }
 
-// SetValue sets the value of the editor to that of the given string.
-func (edit Editor) SetValue(val string) {
-	edit.Call("setValue", val)
+// SetValue sets the current document to `val`.
+func (edit Editor) SetValue(val string) string {
+	return edit.Call("setValue", val).String()
 }
 
-/*
-TODO Missing functions after setValue (till updateSelectionMarkers)
-*/
+// SetValuePos sets the current document to `val`.
+func (edit Editor) SetValuePos(val string, pos int) string {
+	return edit.Call("setValue", val, pos).String()
+}
+
+// SetWrapBehavioursEnabled specifies whether to use wrapping behaviors or not, i.e. automatically
+// wrapping the selection with characters such as brackets when such a character is typed in.
+func (edit Editor) SetWrapBehavioursEnabled(enabled bool) {
+	edit.Call("setWrapBehavioursEnabled", enabled)
+}
+
+// SortLines is an undocumented Ace function.
+func (edit Editor) SortLines(args ...interface{}) *js.Object {
+	return edit.Call("sortLines", args...)
+}
+
+// SplitLine splits the line at the current selection (by inserting an `\n`).
+func (edit Editor) SplitLine() {
+	edit.Call("splitLine")
+}
+
+// ToggleCommentLines given the currently selected range, this function either comments all the lines, or uncomments all of them.
+func (edit Editor) ToggleCommentLines() {
+	edit.Call("toggleCommentLines")
+}
+
+// ToggleOverwrite sets the value of overwrite to the opposite of whatever it currently is.
+func (edit Editor) ToggleOverwrite() {
+	edit.Call("toggleOverwrite")
+}
+
+// ToLowerCase converts the current selection entirely into lowercase.
+func (edit Editor) ToLowerCase() {
+	edit.Call("toLowerCase")
+}
+
+// ToUpperCase converts the current selection entirely into uppercase.
+func (edit Editor) ToUpperCase() {
+	edit.Call("toUpperCase")
+}
+
+// TransposeLetters transposes the current line.
+func (edit Editor) TransposeLetters() {
+	edit.Call("transposeLetters")
+}
+
+// TransposeSelections transposes the selected ranges.
+func (edit Editor) TransposeSelections(dir int) {
+	edit.Call("transposeSelections", dir)
+}
+
+// Undo performs an undo operation on the document, reverting the last change.
+func (edit Editor) Undo() {
+	edit.Call("undo")
+}
+
+// UnsetStyle removes the class `style` from the editor.
+func (edit Editor) UnsetStyle(style interface{}) {
+	edit.Call("unsetStyle", style)
+}
+
+// UpdateSelectionMarkers updates the cursor and marker layers.
+func (edit Editor) UpdateSelectionMarkers() {
+	edit.Call("updateSelectionMarkers")
+}
