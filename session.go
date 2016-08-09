@@ -4,7 +4,7 @@ import (
 	"github.com/gopherjs/gopherjs/js"
 )
 
-// An EditSession is a wrapper for the Ace EditSession type.
+// EditSession is a wrapper for the Ace EditSession type.
 type EditSession struct {
 	*js.Object
 }

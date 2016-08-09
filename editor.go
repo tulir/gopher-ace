@@ -4,7 +4,7 @@ import (
 	"github.com/gopherjs/gopherjs/js"
 )
 
-// An Editor is a wrapper for the Ace Editor type.
+// Editor is a wrapper for the Ace Editor type.
 type Editor struct {
 	*js.Object
 }
