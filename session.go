@@ -264,6 +264,49 @@ func (session EditSession) GetWrapLimitRange() *js.Object {
 	return session.Call("getWrapLimitRange")
 }
 
+// Highlight is an undocumented Ace function.
+func (session EditSession) Highlight(args ...interface{}) *js.Object {
+	return session.Call("highlight", args...)
+}
+
+// HighlightLines is an undocumented Ace function.
+func (session EditSession) HighlightLines(args ...interface{}) *js.Object {
+	return session.Call("highlightLines", args...)
+}
+
+// IndentRows indents all the rows, from `startRow` to `endRow` (inclusive),
+// by prefixing each row with the token in indentString.
+func (session EditSession) IndentRows(startRow, endRow int, indentString string) {
+	session.Call("indentRows", startRow, endRow, indentString)
+}
+
+// Insert inserts a block of `text` and the indicated `position`.
+func (session EditSession) Insert(position interface{}, text string) *js.Object {
+	return session.Call("insert", position, text)
+}
+
+// IsTabStop returns `true` if the character at the position is a soft tab.
+func (session EditSession) IsTabStop(position interface{}) bool {
+	return session.Call("isTabStop", position).Bool()
+}
+
+// MoveLinesDown shifts all the lines in the document down one,
+// starting from `firstRow` and ending at `lastRow`.
+func (session EditSession) MoveLinesDown(firstRow, lastRow int) int {
+	return session.Call("moveLinesDown", firstRow, lastRow).Int()
+}
+
+// MoveLinesUp shifts all the lines in the document up one,
+// starting from `firstRow` and ending at `lastRow`.
+func (session EditSession) MoveLinesUp(firstRow, lastRow int) int {
+	return session.Call("moveLinesUp", firstRow, lastRow).Int()
+}
+
+// MoveText moves a range of text from the given range to the given position. toPosition is an object that looks like this:
+func (session EditSession) MoveText(fromRange, toPosition interface{}) *js.Object {
+	return session.Call("moveText", fromRange, toPosition)
+}
+
 // SetTabSize sets the number of spaces that define a soft tab; for example,
 // passing in 4 transforms the soft tabs to be equivalent to four spaces.
 // This function also emits the `changeTabSize` event.
