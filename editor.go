@@ -25,8 +25,10 @@ func (edit Editor) OnChangeSelectionStyle(f func(data *js.Object)) {
 }
 
 // OnChangeSession binds the given function to the Ace changeSession event.
-func (edit Editor) OnChangeSession(f func(e *js.Object)) {
-	edit.Call("on", "changeSession", f)
+func (edit Editor) OnChangeSession(f func(oldSession, session EditSession)) {
+	edit.Call("on", "changeSession", func(dat *js.Object) {
+		f(EditSession{dat.Get("oldSession")}, EditSession{dat.Get("session")})
+	})
 }
 
 // OnCopy binds the given function to the Ace copy event.
@@ -42,8 +44,10 @@ func (edit Editor) OnFocus(f func()) {
 }
 
 // OnPaste binds the given function to the Ace paste event.
-func (edit Editor) OnPaste(f func(e *js.Object)) {
-	edit.Call("on", "paste", f)
+func (edit Editor) OnPaste(f func(pasted string) string) {
+	edit.Call("on", "paste", func(dat *js.Object) {
+		dat.Set("text", f(dat.Get("text").String()))
+	})
 }
 
 // On binds the given function to the given Ace event.
@@ -52,8 +56,8 @@ func (edit Editor) On(on string, f interface{}) {
 }
 
 // AddSelectionMarker adds the selection and cursor.
-func (edit Editor) AddSelectionMarker(obj interface{}) *js.Object {
-	return edit.Call("addSelectionMarker", obj)
+func (edit Editor) AddSelectionMarker(obj Range) Range {
+	return Range{edit.Call("addSelectionMarker", obj)}
 }
 
 // AlignCursors aligns the cursors or selected text.
@@ -253,8 +257,8 @@ func (edit Editor) GetSelection() *js.Object {
 }
 
 // GetSelectionRange returns the `Range` for the selected text.
-func (edit Editor) GetSelectionRange() *js.Object {
-	return edit.Call("getSelectionRange")
+func (edit Editor) GetSelectionRange() Range {
+	return Range{edit.Call("getSelectionRange")}
 }
 
 // GetSelectionStyle returns the current selection style.
@@ -349,7 +353,7 @@ func (edit Editor) MoveCursorTo(row, column int) {
 }
 
 // MoveCursorToPosition moves the cursor to the position indicated by `pos.row` and `pos.column`.
-func (edit Editor) MoveCursorToPosition(pos interface{}) {
+func (edit Editor) MoveCursorToPosition(pos map[string]interface{}) {
 	edit.Call("moveCursorToPosition", pos)
 }
 
@@ -450,7 +454,7 @@ func (edit Editor) RemoveLines() {
 }
 
 // RemoveSelectionMarker removes the selection marker.
-func (edit Editor) RemoveSelectionMarker(rangee interface{}) {
+func (edit Editor) RemoveSelectionMarker(rangee Range) {
 	edit.Call("removeSelectionMarker", rangee)
 }
 

@@ -36,7 +36,7 @@ func (session EditSession) AddGutterDecoration(row int, className string) {
 // AddMarker adds a new marker to the given `Range`.
 // If `inFront` is `true`, a front marker is defined, and the `changeFrontMarker` event fires;
 // otherwise, the `changeBackMarker` event fires.
-func (session EditSession) AddMarker(rangee interface{}, class string, typee interface{}, inFront bool) int {
+func (session EditSession) AddMarker(rangee Range, class string, typee interface{}, inFront bool) int {
 	return session.Call("addMarker", rangee, class, typee, inFront).Int()
 }
 
@@ -85,8 +85,8 @@ func (session EditSession) GetAnnotations() *js.Object {
 }
 
 // GetAWordRange gets the range of a word, including its right whitespace.
-func (session EditSession) GetAWordRange(row, column int) *js.Object {
-	return session.Call("getAWordRange", row, column)
+func (session EditSession) GetAWordRange(row, column int) Range {
+	return Range{session.Call("getAWordRange", row, column)}
 }
 
 // GetBreakpoints returns an array of numbers, indicating which rows have breakpoints.
@@ -207,7 +207,7 @@ func (session EditSession) GetTabString() string {
 }
 
 // GetTextRange returns all the text within the given range as a single string.
-func (session EditSession) GetTextRange(rangee interface{}) string {
+func (session EditSession) GetTextRange(rangee Range) string {
 	return session.Call("getTextRange", rangee).String()
 }
 
@@ -258,10 +258,10 @@ func (session EditSession) GetWrapLimit() int {
 	return session.Call("getWrapLimit").Int()
 }
 
-// GetWrapLimitRange returns an object that defines the minimum and maximum of the wrap limit;
-// it looks something like this: `{ min: wrapLimitRange_min, max: wrapLimitRange_max }`
-func (session EditSession) GetWrapLimitRange() *js.Object {
-	return session.Call("getWrapLimitRange")
+// GetWrapLimitRange returns the minimum and maximum of the wrap limit
+func (session EditSession) GetWrapLimitRange() (int, int) {
+	obj := session.Call("getWrapLimitRange")
+	return obj.Get("min").Int(), obj.Get("max").Int()
 }
 
 // Highlight is an undocumented Ace function.
@@ -280,14 +280,20 @@ func (session EditSession) IndentRows(startRow, endRow int, indentString string)
 	session.Call("indentRows", startRow, endRow, indentString)
 }
 
-// Insert inserts a block of `text` and the indicated `position`.
-func (session EditSession) Insert(position interface{}, text string) *js.Object {
-	return session.Call("insert", position, text)
+// Insert inserts a block of `text` and the indicated position.
+func (session EditSession) Insert(row, column int, text string) *js.Object {
+	return session.Call("insert", map[string]interface{}{
+		"row":    row,
+		"column": column,
+	}, text)
 }
 
 // IsTabStop returns `true` if the character at the position is a soft tab.
-func (session EditSession) IsTabStop(position interface{}) bool {
-	return session.Call("isTabStop", position).Bool()
+func (session EditSession) IsTabStop(row, column int) bool {
+	return session.Call("isTabStop", map[string]interface{}{
+		"row":    row,
+		"column": column,
+	}).Bool()
 }
 
 // MoveLinesDown shifts all the lines in the document down one,
@@ -303,8 +309,11 @@ func (session EditSession) MoveLinesUp(firstRow, lastRow int) int {
 }
 
 // MoveText moves a range of text from the given range to the given position. toPosition is an object that looks like this:
-func (session EditSession) MoveText(fromRange, toPosition interface{}) *js.Object {
-	return session.Call("moveText", fromRange, toPosition)
+func (session EditSession) MoveText(fromRange Range, toRow, toColumn int) Range {
+	return Range{session.Call("moveText", fromRange, map[string]interface{}{
+		"row":    toRow,
+		"column": toColumn,
+	})}
 }
 
 // SetTabSize sets the number of spaces that define a soft tab; for example,
