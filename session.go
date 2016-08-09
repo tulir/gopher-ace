@@ -79,16 +79,196 @@ func (session EditSession) DuplicateLines(firstRow, lastRow int) int {
 	return session.Call("duplicateLines", firstRow, lastRow).Int()
 }
 
+// GetAnnotations returns the annotations for the `EditSession`.
+func (session EditSession) GetAnnotations() *js.Object {
+	return session.Call("getAnnotations")
+}
+
+// GetAWordRange gets the range of a word, including its right whitespace.
+func (session EditSession) GetAWordRange(row, column int) *js.Object {
+	return session.Call("getAWordRange", row, column)
+}
+
+// GetBreakpoints returns an array of numbers, indicating which rows have breakpoints.
+func (session EditSession) GetBreakpoints() int {
+	return session.Call("getBreakpoints").Int()
+}
+
+// GetDocument returns the `Document` associated with this session.
+func (session EditSession) GetDocument() *js.Object {
+	return session.Call("getDocument")
+}
+
+// GetDocumentLastRowColumn returns the column position of the last screen row for the given document row and column.
+func (session EditSession) GetDocumentLastRowColumn(docRow, docColumn int) *js.Object {
+	return session.Call("getDocumentLastRowColumn", docRow, docColumn)
+}
+
+// GetDocumentLastRowColumnPosition returns the document position of the last row for the given document row and column.
+func (session EditSession) GetDocumentLastRowColumnPosition(docRow, docColumn int) *js.Object {
+	return session.Call("getDocumentLastRowColumnPosition", docRow, docColumn)
+}
+
+// GetLength returns the number of rows in the document.
+func (session EditSession) GetLength() int {
+	return session.Call("getLength").Int()
+}
+
+// GetLine returns a verbatim copy of the given line as it is in the document.
+func (session EditSession) GetLine(row int) string {
+	return session.Call("getLine", row).String()
+}
+
+// GetLines returns an array of strings of the rows between `firstRow` and `lastRow`.
+// This function is inclusive of `lastRow`.
+func (session EditSession) GetLines(firstRow, lastRow int) string {
+	return session.Call("getLines", firstRow, lastRow).String()
+}
+
+// GetMarkers returns an array containing the IDs of all the markers, either front or back.
+func (session EditSession) GetMarkers(inFront bool) *js.Object {
+	return session.Call("getMarkers", inFront)
+}
+
+// GetMode returns the current text mode.
+func (session EditSession) GetMode() *js.Object {
+	return session.Call("getMode")
+}
+
+// GetNewLineMode returns the current new line mode.
+func (session EditSession) GetNewLineMode() string {
+	return session.Call("getNewLineMode").String()
+}
+
+// GetOverwrite returns `true` if overwrites are enabled; `false` otherwise.
+func (session EditSession) GetOverwrite() bool {
+	return session.Call("getOverwrite").Bool()
+}
+
+// GetRowLength returns number of screenrows in a wrapped line.
+func (session EditSession) GetRowLength(row int) int {
+	return session.Call("getRowLength", row).Int()
+}
+
+// GetRowSplitData returns the split data for the given row.
+func (session EditSession) GetRowSplitData(row interface{}) string {
+	return session.Call("getRowSplitData", row).String()
+}
+
+// GetScreenLastRowColumn returns the position (on screen) for the last character in the provided screen row.
+func (session EditSession) GetScreenLastRowColumn(screenRow int) int {
+	return session.Call("getScreenLastRowColumn").Int()
+}
+
+// GetScreenLength returns the length of the screen.
+func (session EditSession) GetScreenLength() int {
+	return session.Call("getScreenLength").Int()
+}
+
+// GetScreenTabSize returns the distance to the next tab stop at the specified screen column.
+func (session EditSession) GetScreenTabSize(screenColumn int) int {
+	return session.Call("getScreenTabSize", screenColumn).Int()
+}
+
+// GetScreenWidth returns the width of the screen.
+func (session EditSession) GetScreenWidth() int {
+	return session.Call("getScreenWidth").Int()
+}
+
+// GetScrollLeft returns the value of the distance between the left of the editor and the leftmost part of the visible content.
+func (session EditSession) GetScrollLeft() int {
+	return session.Call("getScrollLeft").Int()
+}
+
+// GetScrollTop returns the value of the distance between the top of the editor and the topmost part of the visible content.
+func (session EditSession) GetScrollTop() int {
+	return session.Call("getScrollTop").Int()
+}
+
+// GetSelection returns the selection object.
+func (session EditSession) GetSelection() *js.Object {
+	return session.Call("getSelection")
+}
+
+// GetState returns the state of tokenization at the end of a row.
+func (session EditSession) GetState(row int) *js.Object {
+	return session.Call("getState", row)
+}
+
+// GetTabSize returns the current tab size.
+func (session EditSession) GetTabSize() int {
+	return session.Call("getTabSize").Int()
+}
+
+// GetTabString returns the current value for tabs.
+// If the user is using soft tabs, this will be a series of spaces (defined by getTabSize()); otherwise it's simply '\t'.
+func (session EditSession) GetTabString() string {
+	return session.Call("getTabString").String()
+}
+
+// GetTextRange returns all the text within the given range as a single string.
+func (session EditSession) GetTextRange(rangee interface{}) string {
+	return session.Call("getTextRange", rangee).String()
+}
+
+// GetTokenAt returns an object indicating the token at the current row.
+// The object has two properties: `index` and `start`.
+func (session EditSession) GetTokenAt(row, column int) *js.Object {
+	return session.Call("getTokenAt", row, column)
+}
+
+// GetTokens starts tokenizing at the row indicated.
+// Returns a list of objects of the tokenized rows.
+func (session EditSession) GetTokens(row int) *js.Object {
+	return session.Call("getTokens", row)
+}
+
+// GetUndoManager returns the current undo manager.
+func (session EditSession) GetUndoManager() *js.Object {
+	return session.Call("getUndoManager")
+}
+
+// GetUseSoftTabs returns `true` if soft tabs are being used, `false` otherwise.
+func (session EditSession) GetUseSoftTabs() bool {
+	return session.Call("getUseSoftTabs").Bool()
+}
+
+// GetUseWorker returns `true` if workers are being used.
+func (session EditSession) GetUseWorker() bool {
+	return session.Call("getUseWorker").Bool()
+}
+
+// GetUseWrapMode returns `true` if wrap mode is being used; `false` otherwise.
+func (session EditSession) GetUseWrapMode() bool {
+	return session.Call("getUseWrapMode").Bool()
+}
+
+// GetValue returns the current `Document` as a string.
+func (session EditSession) GetValue() string {
+	return session.Call("getValue").String()
+}
+
+// GetWordRange returns the `Range` of the first word boundary it finds after the starting row and column.
+func (session EditSession) GetWordRange(row, column int) *js.Object {
+	return session.Call("getWordRange", row, column)
+}
+
+// GetWrapLimit returns the value of wrap limit.
+func (session EditSession) GetWrapLimit() int {
+	return session.Call("getWrapLimit").Int()
+}
+
+// GetWrapLimitRange returns an object that defines the minimum and maximum of the wrap limit;
+// it looks something like this: `{ min: wrapLimitRange_min, max: wrapLimitRange_max }`
+func (session EditSession) GetWrapLimitRange() *js.Object {
+	return session.Call("getWrapLimitRange")
+}
+
 // SetTabSize sets the number of spaces that define a soft tab; for example,
 // passing in 4 transforms the soft tabs to be equivalent to four spaces.
 // This function also emits the `changeTabSize` event.
 func (session EditSession) SetTabSize(size int) {
 	session.Call("SetTabSize", 4)
-}
-
-// GetLength returns the number of rows in the document
-func (session EditSession) GetLength() int {
-	return session.Call("getLength").Int()
 }
 
 // SetUseSoftTabs - pass `true` to enable the use of soft tabs.
