@@ -237,9 +237,314 @@ func (edit Editor) GetPrintMarginColumn() int {
 	return edit.Call("getPrintMarginColumn").Int()
 }
 
-/*
-TODO Missing functions GetPrintMarginColumn and SetDisplayIndentGuides
-*/
+// GetReadOnly returns `true` if the editor is set to read-only mode.
+func (edit Editor) GetReadOnly() bool {
+	return edit.Call("getReadOnly").Bool()
+}
+
+// GetScrollSpeed returns the value indicating how fast the mouse scroll speed is (in milliseconds).
+func (edit Editor) GetScrollSpeed() int {
+	return edit.Call("getScrollSpeed").Int()
+}
+
+// GetSelection returns the selection object.
+func (edit Editor) GetSelection() *js.Object {
+	return edit.Call("getSelection")
+}
+
+// GetSelectionRange returns the `Range` for the selected text.
+func (edit Editor) GetSelectionRange() *js.Object {
+	return edit.Call("getSelectionRange")
+}
+
+// GetSelectionStyle returns the current selection style.
+func (edit Editor) GetSelectionStyle() string {
+	return edit.Call("getSelectionStyle").String()
+}
+
+// GetShowFoldWidgets returns `true` if the fold widgets are shown.
+func (edit Editor) GetShowFoldWidgets() bool {
+	return edit.Call("getShowFoldWidgets").Bool()
+}
+
+// GetShowInvisibles returns `true` if invisible characters are being shown.
+func (edit Editor) GetShowInvisibles() bool {
+	return edit.Call("getShowInvisibles").Bool()
+}
+
+// GetShowPrintMargin returns `true` if the print margin is being shown.
+func (edit Editor) GetShowPrintMargin() bool {
+	return edit.Call("getShowPrintMargin").Bool()
+}
+
+// GetValue returns the path of the current theme.
+func (edit Editor) GetValue() string {
+	return edit.Call("getValue").String()
+}
+
+// GetTheme returns the content in the editor.
+func (edit Editor) GetTheme() string {
+	return edit.Call("getTheme").String()
+}
+
+// GetWrapBehavioursEnabled returns `true` if the wrapping behaviors are currently enabled.
+func (edit Editor) GetWrapBehavioursEnabled() bool {
+	return edit.Call("getWrapBehavioursEnabled").Bool()
+}
+
+// GotoLine moves the cursor to the specified line number, and also into the indiciated column.
+func (edit Editor) GotoLine(lineNumber, column int, animate bool) {
+	edit.Call("gotoLine", lineNumber, column, animate)
+}
+
+// GotoPageDown shifts the document to wherever "page down" is, as well as moving the cursor position.
+func (edit Editor) GotoPageDown() {
+	edit.Call("gotoPageDown")
+}
+
+// GotoPageUp shifts the document to wherever "page up" is, as well as moving the cursor position.
+func (edit Editor) GotoPageUp() {
+	edit.Call("gotoPageUp")
+}
+
+// Indent indents the current line,
+func (edit Editor) Indent() {
+	edit.Call("indent")
+}
+
+// Insert inserts `text` into wherever the cursor is pointing.
+func (edit Editor) Insert(text string) {
+	edit.Call("insert", text)
+}
+
+// IsFocused returns `true` if the current `textInput` is in focus.
+func (edit Editor) IsFocused() bool {
+	return edit.Call("isFocused").Bool()
+}
+
+// IsRowFullyVisible indicates if the entire row is currently visible on the screen.
+func (edit Editor) IsRowFullyVisible(row int) bool {
+	return edit.Call("isRowFullyVisible", row).Bool()
+}
+
+// IsRowVisible indicates if the row is currently visible on the screen.
+func (edit Editor) IsRowVisible(row int) bool {
+	return edit.Call("isRowVisible", row).Bool()
+}
+
+// JumpToMatching moves the cursor's row and column to the next matching bracket.
+func (edit Editor) JumpToMatching(sel interface{}) {
+	edit.Call("jumpToMatching", sel)
+}
+
+// ModifyNumber - if the character before the cursor is a number, this functions changes its value by `amount`.
+func (edit Editor) ModifyNumber(amount int) {
+	edit.Call("modifyNumber", amount)
+}
+
+// MoveCursorTo moves the cursor to the specified row and column.
+// Note that this does not de-select the current selection.
+func (edit Editor) MoveCursorTo(row, column int) {
+	edit.Call("moveCursorTo", row, column)
+}
+
+// MoveCursorToPosition moves the cursor to the position indicated by `pos.row` and `pos.column`.
+func (edit Editor) MoveCursorToPosition(pos interface{}) {
+	edit.Call("moveCursorToPosition", pos)
+}
+
+// MoveLinesDown shifts all the selected lines down one row.
+func (edit Editor) MoveLinesDown() int {
+	return edit.Call("moveLinesDown").Int()
+}
+
+// MoveLinesUp shifts all the selected lines up one row.
+func (edit Editor) MoveLinesUp() int {
+	return edit.Call("moveLinesUp").Int()
+}
+
+// MoveText is an undocumented Ace function.
+func (edit Editor) MoveText(args ...interface{}) *js.Object {
+	return edit.Call("moveText", args...)
+}
+
+// NavigateUp moves the cursor up in the document the specified number of times.
+// Note that this does de-select the current selection.
+func (edit Editor) NavigateUp(times int) {
+	edit.Call("navigateUp", times)
+}
+
+// NavigateDown moves the cursor down in the document the specified number of times.
+// Note that this does de-select the current selection.
+func (edit Editor) NavigateDown(times int) {
+	edit.Call("navigateDown", times)
+}
+
+// NavigateLeft moves the cursor left in the document the specified number of times.
+// Note that this does de-select the current selection.
+func (edit Editor) NavigateLeft(times int) {
+	edit.Call("navigateLeft", times)
+}
+
+// NavigateRight moves the cursor right in the document the specified number of times.
+// Note that this does de-select the current selection.
+func (edit Editor) NavigateRight(times int) {
+	edit.Call("navigateRight", times)
+}
+
+// NavigateTo moves the cursor to the specified row and column.
+// Note that this does de-select the current selection.
+func (edit Editor) NavigateTo(row, column int) {
+	edit.Call("navigateTo", row, column)
+}
+
+// NavigateFileStart moves the cursor to the start of the current file.
+// Note that this does de-select the current selection.
+func (edit Editor) NavigateFileStart() {
+	edit.Call("navigateFileStart")
+}
+
+// NavigateFileEnd moves the cursor to the end of the current file.
+// Note that this does de-select the current selection.
+func (edit Editor) NavigateFileEnd() {
+	edit.Call("navigateFileEnd")
+}
+
+// NavigateLineStart moves the cursor to the start of the current line.
+// Note that this does de-select the current selection.
+func (edit Editor) NavigateLineStart() {
+	edit.Call("navigateLineStart")
+}
+
+// NavigateLineEnd moves the cursor to the end of the current line.
+// Note that this does de-select the current selection.
+func (edit Editor) NavigateLineEnd() {
+	edit.Call("navigateLineEnd")
+}
+
+// NavigateWordLeft moves the cursor to the word immediately to the left of the current position.
+// Note that this does de-select the current selection.
+func (edit Editor) NavigateWordLeft() {
+	edit.Call("navigateLineLeft")
+}
+
+// NavigateWordRight moves the cursor to the word immediately to the right of the current position.
+// Note that this does de-select the current selection.
+func (edit Editor) NavigateWordRight() {
+	edit.Call("navigateLineRight")
+}
+
+// Redo performs a redo operation on the document, reimplementing the last change.
+func (edit Editor) Redo() {
+	edit.Call("redo")
+}
+
+// Remove removes words of text from the editor. A "word" is defined as a string of characters bookended by whitespace.
+func (edit Editor) Remove(dir string) {
+	edit.Call("remove", dir)
+}
+
+// RemoveLines removes all the lines in the current selection.
+func (edit Editor) RemoveLines() {
+	edit.Call("removeLines")
+}
+
+// RemoveSelectionMarker removes the selection marker.
+func (edit Editor) RemoveSelectionMarker(rangee interface{}) {
+	edit.Call("removeSelectionMarker", rangee)
+}
+
+// RemoveToLineStart removes all the words to the left of the current selection, until the start of the line.
+func (edit Editor) RemoveToLineStart() {
+	edit.Call("removeToLineStart")
+}
+
+// RemoveToLineEnd removes all the words to the right of the current selection, until the end of the line.
+func (edit Editor) RemoveToLineEnd() {
+	edit.Call("removeToLineEnd")
+}
+
+// RemoveToLineLeft removes the word directly to the left of the current selection.
+func (edit Editor) RemoveToLineLeft() {
+	edit.Call("removeToLineLeft")
+}
+
+// RemoveToLineRight removes the word directly to the right of the current selection.
+func (edit Editor) RemoveToLineRight() {
+	edit.Call("removeToLineRight")
+}
+
+// Replace replaces the first occurance of `options.needle` with the value in `replacement`.
+func (edit Editor) Replace(replacement string, options interface{}) {
+	edit.Call("replace", replacement, options)
+}
+
+// ReplaceAll replaces all occurances of `options.needle` with the value in `replacement`.
+func (edit Editor) ReplaceAll(replacement string, options interface{}) {
+	edit.Call("replaceAll", replacement, options)
+}
+
+// RevealRange is an undocumented Ace function.
+func (edit Editor) RevealRange(args ...interface{}) *js.Object {
+	return edit.Call("revealRange", args...)
+}
+
+// ScrollPageUp scrolls the document to wherever "page up" is, without changing the cursor position.
+func (edit Editor) ScrollPageUp() {
+	edit.Call("scrollPageUp")
+}
+
+// ScrollPageDown scrolls the document to wherever "page down" is, without changing the cursor position.
+func (edit Editor) ScrollPageDown() {
+	edit.Call("scrollPageDown")
+}
+
+// ScrollToLine scrolls to a line.
+// If center is true, it puts the line in middle of screen (or attempts to).
+func (edit Editor) ScrollToLine(line int, center, animate bool, callback func()) {
+	edit.Call("scrollToLine", line, center, animate, callback)
+}
+
+// ScrollToRow moves the editor to the specified row.
+func (edit Editor) ScrollToRow(row interface{}) {
+	edit.Call("scrollToRow", row)
+}
+
+// SelectAll Selects all the text in editor.
+func (edit Editor) SelectAll() {
+	edit.Call("selectAll")
+}
+
+// SelectMore finds the next occurence of text in an active selection and adds it to the selections.
+func (edit Editor) SelectMore(dir int, skip bool) {
+	edit.Call("selctMore", dir, skip)
+}
+
+// SelectMoreLines adds a cursor above or below the active cursor.
+func (edit Editor) SelectMoreLines(dir int, skip bool) {
+	edit.Call("selectMoreLines", dir, skip)
+}
+
+// SelectPageDown selects the text from the current position of the document until where a "page down" finishes.
+func (edit Editor) SelectPageDown() {
+	edit.Call("selectPageDown")
+}
+
+// SelectPageUp selects the text from the current position of the document until where a "page up" finishes.
+func (edit Editor) SelectPageUp() {
+	edit.Call("selectPageUp")
+}
+
+// SetAnimatedScroll is an undocumented Ace function.
+func (edit Editor) SetAnimatedScroll(args ...interface{}) *js.Object {
+	return edit.Call("setAnimatedScroll")
+}
+
+// SetBehavioursEnabled specifies whether to use behaviors or not.
+// "Behaviors" in this case is the auto-pairing of special characters, like quotation marks, parenthesis, or brackets.
+func (edit Editor) SetBehavioursEnabled(enabled bool) {
+	edit.Call("setBehavioursEnabled", enabled)
+}
 
 // SetDisplayIndentGuides is an undocumented Ace function.
 func (edit Editor) SetDisplayIndentGuides(args ...interface{}) *js.Object {
@@ -267,7 +572,7 @@ func (edit Editor) SetHighlightActiveLine(shouldHighlight bool) {
 }
 
 /*
-TODO Missing functions after SetHighlightActiveLine
+TODO Missing functions between setHighlightActiveLine and setTheme
 */
 
 // SetTheme changes the theme of the editor.
@@ -275,12 +580,11 @@ func (edit Editor) SetTheme(theme string) {
 	edit.Call("setTheme", theme)
 }
 
-// GetValue returns the content in the editor.
-func (edit Editor) GetValue() string {
-	return edit.Call("getValue").String()
-}
-
 // SetValue sets the value of the editor to that of the given string.
 func (edit Editor) SetValue(val string) {
 	edit.Call("setValue", val)
 }
+
+/*
+TODO Missing functions after setValue (till updateSelectionMarkers)
+*/
