@@ -4,6 +4,14 @@ import (
 	"github.com/gopherjs/gopherjs/js"
 )
 
+// OptionProvider is the Ace optionProvider interface
+type OptionProvider interface {
+	SetOption(optionName string, optionValue interface{})
+	SetOptions(map[string]interface{})
+	GetOption(optionName string) *js.Object
+	GetOptions() *js.Object
+}
+
 // Function and variable names
 const (
 	Ace = "ace"

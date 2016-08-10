@@ -726,3 +726,23 @@ func (edit Editor) UnsetStyle(style interface{}) {
 func (edit Editor) UpdateSelectionMarkers() {
 	edit.Call("updateSelectionMarkers")
 }
+
+// SetOption sets an option.
+func (edit Editor) SetOption(optionName string, optionValue interface{}) {
+	edit.Call("setOption", optionName, optionValue)
+}
+
+// SetOptions sets all options.
+func (edit Editor) SetOptions(options map[string]interface{}) {
+	edit.Call("setOptions", options)
+}
+
+// GetOption gets the option with teh given name.
+func (edit Editor) GetOption(optionName string) *js.Object {
+	return edit.Call("getOption", optionName)
+}
+
+// GetOptions gets all options
+func (edit Editor) GetOptions() *js.Object {
+	return edit.Call("getOptions")
+}

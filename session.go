@@ -117,13 +117,13 @@ func (session EditSession) ClearAnnotations() {
 }
 
 // ClearBreakpoint removes a breakpoint on the row number given by rows.
-// This function also emites the `changeBreakpoint` event.
+// This function also emits the `changeBreakpoint` event.
 func (session EditSession) ClearBreakpoint(row int) {
 	session.Call("clearBreakpoint", row)
 }
 
 // ClearBreakpoints removes all breakpoints on the rows.
-// This function also emites the `changeBreakpoint` event.
+// This function also emits the `changeBreakpoint` event.
 func (session EditSession) ClearBreakpoints() {
 	session.Call("clearBreakpoints")
 }
@@ -386,21 +386,201 @@ func (session EditSession) MoveText(fromRange Range, toRow, toColumn int) Range 
 	})}
 }
 
-// SetTabSize sets the number of spaces that define a soft tab; for example,
-// passing in 4 transforms the soft tabs to be equivalent to four spaces.
+// OutdentRows outdents all the rows defined by the `start` and `end` properties of `range`.
+func (session EditSession) OutdentRows(rangee Range) {
+	session.Call("outdentRows", rangee)
+}
+
+// Redo is an undocumented Ace function.
+func (session EditSession) Redo(args ...interface{}) *js.Object {
+	return session.Call("redo", args...)
+}
+
+// RedoChanges re-implements a previously undone change to your document.
+func (session EditSession) RedoChanges(deltas []interface{}, dontSelect bool) Range {
+	return Range{session.Call("redoChanges", deltas, dontSelect)}
+}
+
+// Remove removes the `range` from the document.
+func (session EditSession) Remove(rangee Range) *js.Object {
+	return session.Call("remove", rangee)
+}
+
+// RemoveGutterDecoration removes `className` from the `row`.
+func (session EditSession) RemoveGutterDecoration(row int, className string) {
+	session.Call("removeGutterDecoration", row, className)
+}
+
+// RemoveMarker removes the marker with the specified ID.
+// If this marker was in front, the `changeFrontMarker` event is emitted.
+// If the marker was in the back, the `changeBackMarker` event is emitted.
+func (session EditSession) RemoveMarker(markerID int) {
+	session.Call("removeMarker", markerID)
+}
+
+// Replace replaces a range in the document with the new `text`.
+func (session EditSession) Replace(rangee Range, text string) *js.Object {
+	return session.Call("replace", rangee, text)
+}
+
+// Reset is an undocumented Ace function.
+func (session EditSession) Reset(args ...interface{}) *js.Object {
+	return session.Call("reset", args...)
+}
+
+// ResetCaches is an undocumented Ace function.
+func (session EditSession) ResetCaches(args ...interface{}) *js.Object {
+	return session.Call("resetCaches", args...)
+}
+
+// ScreenToDocumentColumn is an undocumented Ace function.
+func (session EditSession) ScreenToDocumentColumn(args ...interface{}) *js.Object {
+	return session.Call("screenToDocumentColumn", args...)
+}
+
+// ScreenToDocumentPosition converts characters coordinates on the screen to characters coordinates
+// within the document.
+// This takes into account code folding, word wrap, tab size, and any other visual modifications.
+func (session EditSession) ScreenToDocumentPosition(screenRow, screenColumn int) *js.Object {
+	return session.Call("screenToDocumentPosition", screenRow, screenColumn)
+}
+
+// ScreenToDocumentRow is an undocumented Ace function.
+func (session EditSession) ScreenToDocumentRow(args ...interface{}) *js.Object {
+	return session.Call("screenToDocumentRow", args...)
+}
+
+// SetAnnotations sets annotations for the `EditSession`.
+// This functions emits the `changeAnnotation` event.
+func (session EditSession) SetAnnotations(annotations []interface{}) {
+	session.Call("setAnnotations", annotations)
+}
+
+// SetBreakpoint sets a breakpoint on the row number given by `rows`.
+// This function also emits the `changeBreakpoint` event.
+func (session EditSession) SetBreakpoint(row int, className string) {
+	session.Call("setBreakpoint", row, className)
+}
+
+// SetBreakpoints sets a breakpoint on every row given by `rows`.
+// This function also emits the `changeBreakpoint` event.
+func (session EditSession) SetBreakpoints(rows []interface{}) {
+	session.Call("setBreakpoints", rows)
+}
+
+// SetDocument sets the `EditSession` to point to a new `Document`. If a `BackgroundTokenizer` exists, it also points to `doc`.
+func (session EditSession) SetDocument(doc interface{}) {
+	session.Call("setDocument", doc)
+}
+
+// SetMode is an undocumented Ace function.
+func (session EditSession) SetMode(args ...interface{}) *js.Object {
+	return session.Call("setMode", args...)
+}
+
+// SetNewLineMode sets the new line mode.
+func (session EditSession) SetNewLineMode(newLineMode string) {
+	session.Call("setNewLineMode", newLineMode)
+}
+
+// SetOverwrite - Pass in `true` to enable overwrites in your session, or `false` to disable
+func (session EditSession) SetOverwrite(overwrite bool) {
+	session.Call("setOverwrite", overwrite)
+}
+
+// SetScrollLeft sets the value of the distance between the left of the editor and the leftmost part of the visible content.
+func (session EditSession) SetScrollLeft(scrollLeft interface{}) {
+	session.Call("setScrollLeft", scrollLeft)
+}
+
+// SetScrollTop sets the scroll top value.
+// This function also emits the `changeScrollTop` event.
+func (session EditSession) SetScrollTop(scrollTop int) {
+	session.Call("setScrollTop", scrollTop)
+}
+
+// SetTabSize set the number of spaces that define a soft tab;
+// for example, passing in `4` transforms the soft tabs to be equivalent to four spaces.
 // This function also emits the `changeTabSize` event.
-func (session EditSession) SetTabSize(size int) {
-	session.Call("SetTabSize", 4)
+func (session EditSession) SetTabSize(tabSize int) {
+	session.Call("setTabSize", tabSize)
+}
+
+// SetUndoManager sets the undo manager.
+func (session EditSession) SetUndoManager(undoManager interface{}) {
+	session.Call("setUndoManager", undoManager)
+}
+
+// SetUndoSelect enables or disables highlighting of the range where an undo occured.
+func (session EditSession) SetUndoSelect(enable bool) {
+	session.Call("setUndoSelect", enable)
 }
 
 // SetUseSoftTabs - pass `true` to enable the use of soft tabs.
-// Soft tabs means you're using spaces instead of the tab character (`\t`)
+// Soft tabs means you're using spaces instead of the tab character (`\t`).
 func (session EditSession) SetUseSoftTabs(useSoftTabs bool) {
 	session.Call("setUseSoftTabs", useSoftTabs)
+}
+
+// SetUseWorker identifies if you want to use a worker for the `EditSession`.
+func (session EditSession) SetUseWorker(useWorker bool) {
+	session.Call("setUseWorker", useWorker)
 }
 
 // SetUseWrapMode sets whether or not line wrapping is enabled.
 // If `useWrapMode` is different than the current value, the `changeWrapMode` event is emitted.
 func (session EditSession) SetUseWrapMode(useWrapMode bool) {
 	session.Call("setUseWrapMode", useWrapMode)
+}
+
+// SetValue sets the session text.
+func (session EditSession) SetValue(text string) {
+	session.Call("setValue", text)
+}
+
+// SetWrapLimitRange sets the boundaries of wrap.
+// Either value can be null to have an unconstrained wrap, or, they can be the same number to pin the limit.
+// If the wrap limits for min or max are different, this method also emits the `changeWrapMode` event.
+func (session EditSession) SetWrapLimitRange(min, max int) {
+	session.Call("setWrapLimitRange", min, max)
+}
+
+// ToggleOverwrite sets the value of overwrite to the opposite of whatever it currently is.
+func (session EditSession) ToggleOverwrite() {
+	session.Call("toggleOverwrite")
+}
+
+// ToString returns the current `Document` as a string.
+func (session EditSession) ToString() string {
+	return session.Call("toString").String()
+}
+
+// Undo is an undocumented Ace function.
+func (session EditSession) Undo(args ...interface{}) *js.Object {
+	return session.Call("undo", args...)
+}
+
+// UndoChanges reverts previous changes to your document.
+func (session EditSession) UndoChanges(deltas []interface{}, dontSelect bool) Range {
+	return Range{session.Call("undoChanges", deltas, dontSelect)}
+}
+
+// SetOption sets an option.
+func (session EditSession) SetOption(optionName string, optionValue interface{}) {
+	session.Call("setOption", optionName, optionValue)
+}
+
+// SetOptions sets all options.
+func (session EditSession) SetOptions(options map[string]interface{}) {
+	session.Call("setOptions", options)
+}
+
+// GetOption gets the option with teh given name.
+func (session EditSession) GetOption(optionName string) *js.Object {
+	return session.Call("getOption", optionName)
+}
+
+// GetOptions gets all options
+func (session EditSession) GetOptions() *js.Object {
+	return session.Call("getOptions")
 }
