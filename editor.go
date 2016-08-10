@@ -597,7 +597,7 @@ func (edit Editor) SetKeyboardHandler(keyboardHandler string) {
 
 // SetOverwrite - Pass in `true` to enable overwrites in your session, or `false` to disable.
 // If overwrites is enabled, any text you enter will type over any text after it.
-// If the value of `overwrite` changes, this function also emites the `changeOverwrite` event.
+// If the value of `overwrite` changes, this function also emits the `changeOverwrite` event.
 func (edit Editor) SetOverwrite(overwrite bool) {
 	edit.Call("setOverwrite", overwrite)
 }
