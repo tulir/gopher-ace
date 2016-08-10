@@ -216,7 +216,8 @@ func (edit Editor) GetKeyboardHandler() string {
 	return edit.Call("getKeyboardHandler").String()
 }
 
-// GetLastSearchOptions returns an object containing all the search options. For more information on `options`, see `Search`.
+// GetLastSearchOptions returns an object containing all the search options.
+// For more information on `options`, see `Search`.
 func (edit Editor) GetLastSearchOptions() *js.Object {
 	return edit.Call("GetLastSearchOptions")
 }
@@ -443,7 +444,8 @@ func (edit Editor) Redo() {
 	edit.Call("redo")
 }
 
-// Remove removes words of text from the editor. A "word" is defined as a string of characters bookended by whitespace.
+// Remove removes words of text from the editor.
+// A "word" is defined as a string of characters bookended by whitespace.
 func (edit Editor) Remove(dir string) {
 	edit.Call("remove", dir)
 }
@@ -458,12 +460,14 @@ func (edit Editor) RemoveSelectionMarker(rangee Range) {
 	edit.Call("removeSelectionMarker", rangee)
 }
 
-// RemoveToLineStart removes all the words to the left of the current selection, until the start of the line.
+// RemoveToLineStart removes all the words to the left of the current selection,
+// until the start of the line.
 func (edit Editor) RemoveToLineStart() {
 	edit.Call("removeToLineStart")
 }
 
-// RemoveToLineEnd removes all the words to the right of the current selection, until the end of the line.
+// RemoveToLineEnd removes all the words to the right of the current selection,
+// until the end of the line.
 func (edit Editor) RemoveToLineEnd() {
 	edit.Call("removeToLineEnd")
 }
@@ -545,7 +549,8 @@ func (edit Editor) SetAnimatedScroll(args ...interface{}) *js.Object {
 }
 
 // SetBehavioursEnabled specifies whether to use behaviors or not.
-// "Behaviors" in this case is the auto-pairing of special characters, like quotation marks, parenthesis, or brackets.
+// "Behaviors" in this case is the auto-pairing of special characters,
+// like quotation marks, parenthesis, or brackets.
 func (edit Editor) SetBehavioursEnabled(enabled bool) {
 	edit.Call("setBehavioursEnabled", enabled)
 }
@@ -602,7 +607,8 @@ func (edit Editor) SetPrintMarginColumn(showPrintMargin int) {
 	edit.Call("setPrintMarginColumn", showPrintMargin)
 }
 
-// SetReadOnly - If `readOnly` is true, then the editor is set to read-only mode, and none of the content can change.
+// SetReadOnly - If `readOnly` is true, then the editor is set to read-only mode,
+// and none of the content can change.
 func (edit Editor) SetReadOnly(readOnly bool) {
 	edit.Call("setReadOnly", readOnly)
 }
@@ -627,7 +633,8 @@ func (edit Editor) SetShowFoldWidgets(show bool) {
 	edit.Call("setShowFoldWidgets", show)
 }
 
-// SetShowInvisibles - If `showInvisibles` is set to `true`, invisible characters—like spaces or new lines—are show in the editor.
+// SetShowInvisibles - If `showInvisibles` is set to `true`, invisible characters—like spaces or
+// new lines—are show in the editor.
 func (edit Editor) SetShowInvisibles(showInvisibles bool) {
 	edit.Call("setShowInvisibles", showInvisibles)
 }
@@ -642,7 +649,8 @@ func (edit Editor) SetStyle(style string) {
 	edit.Call("setStyle", style)
 }
 
-// SetTheme sets a new theme for the editor. `theme` should exist, and be a directory path, like `ace/theme/textmate`.
+// SetTheme sets a new theme for the editor. `theme` should exist, and be a directory path,
+// like `ace/theme/textmate`.
 func (edit Editor) SetTheme(theme string) {
 	edit.Call("setTheme", theme)
 }
@@ -673,7 +681,8 @@ func (edit Editor) SplitLine() {
 	edit.Call("splitLine")
 }
 
-// ToggleCommentLines either comments all the lines or uncomments all of them depending on the currently selected range.
+// ToggleCommentLines either comments all the lines or uncomments all of them depending on the
+// currently selected range.
 func (edit Editor) ToggleCommentLines() {
 	edit.Call("toggleCommentLines")
 }

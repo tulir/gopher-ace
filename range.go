@@ -29,7 +29,8 @@ func (r Range) EndColumn() int {
 	return r.Get("end").Get("column").Int()
 }
 
-// ClipRows returns the part of the current `Range` that occurs within the boundaries of `firstRow` and `lastRow` as a new `Range` object.
+// ClipRows returns the part of the current `Range` that occurs within the boundaries of `firstRow`
+// and `lastRow` as a new `Range` object.
 func (r Range) ClipRows(firstRow, lastRow int) Range {
 	return Range{r.Call("clipRows", firstRow, lastRow)}
 }
@@ -39,7 +40,8 @@ func (r Range) Clone() Range {
 	return Range{r.Call("clone")}
 }
 
-// CollapseRows returns a range containing the starting and ending rows of the original range, but with a column value of `0`.
+// CollapseRows returns a range containing the starting and ending rows of the original range,
+// but with a column value of `0`.
 func (r Range) CollapseRows() Range {
 	return Range{r.Call("collapseRows")}
 }
