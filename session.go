@@ -308,7 +308,7 @@ func (session EditSession) MoveLinesUp(firstRow, lastRow int) int {
 	return session.Call("moveLinesUp", firstRow, lastRow).Int()
 }
 
-// MoveText moves a range of text from the given range to the given position. toPosition is an object that looks like this:
+// MoveText moves a range of text from the given range to the given position.
 func (session EditSession) MoveText(fromRange Range, toRow, toColumn int) Range {
 	return Range{session.Call("moveText", fromRange, map[string]interface{}{
 		"row":    toRow,
