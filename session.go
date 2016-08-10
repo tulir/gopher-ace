@@ -14,9 +14,79 @@ func (edit Editor) GetSession() EditSession {
 	return EditSession{edit.Call("getSession")}
 }
 
-/*
-TODO direct event bindings
-*/
+// OnChange binds the given function to the Ace change event.
+func (session EditSession) OnChange(f func(obj *js.Object)) {
+	session.Call("on", "change", f)
+}
+
+// OnChangeAnnotation binds the given function to the Ace changeAnnotation event.
+func (session EditSession) OnChangeAnnotation(f func()) {
+	session.Call("on", "changeAnnotation", f)
+}
+
+// OnChangeBackMarker binds the given function to the Ace changeBackMarker event.
+func (session EditSession) OnChangeBackMarker(f func()) {
+	session.Call("on", "changeBackMarker", f)
+}
+
+// OnChangeBreakpoint binds the given function to the Ace changeBreakpoint event.
+func (session EditSession) OnChangeBreakpoint(f func()) {
+	session.Call("on", "changeBreakpoint", f)
+}
+
+// OnChangeFold binds the given function to the Ace changeFold event.
+func (session EditSession) OnChangeFold(f func()) {
+	session.Call("on", "changeFold", f)
+}
+
+// OnChangeFrontMarker binds the given function to the Ace changeFrontMarker event.
+func (session EditSession) OnChangeFrontMarker(f func()) {
+	session.Call("on", "changeFrontMarker", f)
+}
+
+// OnChangeMode binds the given function to the Ace changeMode event.
+func (session EditSession) OnChangeMode(f func()) {
+	session.Call("on", "changeMode", f)
+}
+
+// OnChangeOverwrite binds the given function to the Ace changeOverwrite event.
+func (session EditSession) OnChangeOverwrite(f func()) {
+	session.Call("on", "changeOverwrite", f)
+}
+
+// OnChangeScrollLeft binds the given function to the Ace changeScrollLeft event.
+func (session EditSession) OnChangeScrollLeft(f func(scrollTop int)) {
+	session.Call("on", "changeScrollLeft", func(obj *js.Object) {
+		f(obj.Int())
+	})
+}
+
+// OnChangeScrollTop binds the given function to the Ace changeScrollTop event.
+func (session EditSession) OnChangeScrollTop(f func(scrollTop int)) {
+	session.Call("on", "changeScrollTop", func(obj *js.Object) {
+		f(obj.Int())
+	})
+}
+
+// OnChangeTabSize binds the given function to the Ace changeTabSize event.
+func (session EditSession) OnChangeTabSize(f func()) {
+	session.Call("on", "changeTabSize", f)
+}
+
+// OnChangeWrapLimit binds the given function to the Ace changeWrapLimit event.
+func (session EditSession) OnChangeWrapLimit(f func()) {
+	session.Call("on", "changeWrapLimit", f)
+}
+
+// OnChangeWrapMode binds the given function to the Ace changeWrapMode event.
+func (session EditSession) OnChangeWrapMode(f func()) {
+	session.Call("on", "changeWrapMode", f)
+}
+
+// OnTokenizerUpdate binds the given function to the Ace tokenizerUpdate event.
+func (session EditSession) OnTokenizerUpdate(f func(obj *js.Object)) {
+	session.Call("on", "tokenizerUpdate", f)
+}
 
 // On binds the given function to the given Ace event.
 func (session EditSession) On(on string, f interface{}) {
