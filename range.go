@@ -9,6 +9,11 @@ type Range struct {
 	*js.Object
 }
 
+// NewRange returns a newly created Range object.
+func NewRange(startRow, startColumn, endRow, endColumn int) Range {
+	return Range{js.Global.Get("Range").New(startRow, startColumn, endRow, endColumn)}
+}
+
 // StartRow returns the starting row of this Range object.
 func (r Range) StartRow() int {
 	return r.Get("start").Get("row").Int()
